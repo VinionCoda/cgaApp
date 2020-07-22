@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" name="App" packages="">
+    <Properties>
+        <Property name="LOG_PATTERN_ONE">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+        <Property name="LOG_PATTERN_TWO">%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Property>
+        <Property name="LOG_DIR">C://Log</Property>
+    </Properties>      
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN_TWO}"/>
+        </Console>
+        <RollingFile
+            name="rollinfo"
+            fileName="${LOG_DIR}/info.log"
+            filePattern="${LOG_DIR}/info.%i.log.gz"
+            ignoreExceptions="false">
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN_TWO}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>   
+        <RollingFile
+            name="rollerror"
+            fileName="${LOG_DIR}/error.log"
+            filePattern="${LOG_DIR}/error.%i.log.gz"
+            ignoreExceptions="false">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN_TWO}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>   
+        <RollingFile
+            name="rollfatag"
+            fileName="${LOG_DIR}/fatal.log"
+            filePattern="${LOG_DIR}/fatal.%i.log.gz"
+            ignoreExceptions="false">
+            <LevelRangeFilter minLevel="FATAL" maxLevel="FATAL" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN_TWO}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>                                           
+    </Appenders>
+    <Loggers>        
+        <Root level="all">
+            <AppenderRef ref="Console"/>  
+            <AppenderRef ref="rollinfo" level="ALL"/>   
+            <AppenderRef ref="rollerror" level="ALL"/>                   
+        </Root>
+    </Loggers>
+</Configuration>

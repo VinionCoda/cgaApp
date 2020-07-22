@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="865.0" style="-fx-background-color: #B2D237; -fx-arc-height: 20; -fx-arc-width: 20;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+    <children>
+      <MenuBar fx:id="menu_bar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="875.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="close_app" mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Options" />
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="about_app" mnemonicParsing="false" onAction="#about" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+        <Pane fx:id="head" layoutX="20.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="826.0">
+            <children>
+            <Group>
+               <children>
+                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="95.0" stroke="BLACK" strokeType="INSIDE" width="825.0">
+                          <effect>
+                              <DropShadow offsetX="2.0" offsetY="4.0" spread="0.23" />
+                          </effect>
+                      </Rectangle>
+                      <Label fx:id="timeClock" layoutX="14.0" layoutY="60.0" prefHeight="25.0" prefWidth="142.0" text="Clock is here">
+                          <font>
+                              <Font size="14.0" />
+                          </font>
+                      </Label>
+                      <Label fx:id="user_lbl" layoutX="671.0" layoutY="10.0" prefHeight="25.0" prefWidth="162.0" text="User: XXXXXX">
+                          <font>
+                              <Font size="14.0" />
+                          </font>
+                      </Label>
+                      <Label fx:id="date_lbl" layoutX="14.0" layoutY="10.0" prefHeight="25.0" prefWidth="142.0" text="Date: xx/xx/xxxx">
+                          <font>
+                              <Font size="14.0" />
+                          </font>
+                      </Label>
+                      <Label fx:id="title_lbl" alignment="CENTER" layoutX="187.0" layoutY="7.0" prefHeight="32.0" prefWidth="451.0" text="APP TITLE HERE" textAlignment="CENTER">
+                          <font>
+                              <Font name="Georgia Bold" size="21.0" />
+                          </font>
+                          <opaqueInsets>
+                              <Insets />
+                          </opaqueInsets>
+                      </Label>
+                      <Label fx:id="last_login_lbl" layoutX="671.0" layoutY="60.0" prefHeight="25.0" prefWidth="162.0" text="Last Access: xx/xx/xxxx">
+                          <font>
+                              <Font size="14.0" />
+                          </font>
+                      </Label>
+               </children>
+            </Group>
+            </children>
+        </Pane>
+        <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="875.0" style="-fx-background-color: transparent;" />
+      <Group layoutY="-237.0" visible="true">
+         <children>
+            <Button layoutX="758.0" layoutY="825.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="64.0" style="-fx-font-size: 14;" text="Submit">
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="26.93" offsetX="4.0" offsetY="3.0" radius="11.48" width="20.99" />
+               </effect>
+            </Button>
+            <Button fx:id="clear_btn" layoutX="667.0" layoutY="825.0" mnemonicParsing="false" onAction="#clearBttn" prefHeight="30.0" prefWidth="64.0" style="-fx-font-size: 14;" text="Clear">
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="26.93" offsetX="4.0" offsetY="3.0" radius="11.48" width="20.99" />
+               </effect>
+            </Button>
+         </children>
+      </Group>
+    </children>
+</Pane>

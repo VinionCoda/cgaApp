@@ -1,0 +1,4 @@
+ver 1.2: Base Template App
+
+*********************************
+ver 1.0: start
