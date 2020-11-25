@@ -82,8 +82,9 @@ public abstract class Index implements Initializable {
      */
     private int year;
     private User user;
-    private AppState state;
-    private static final org.apache.logging.log4j.Logger LOGR = LogManager.getLogger(AppInfo.class);
+    public AppState state;
+    public AppInfo appinfo;
+    private static final org.apache.logging.log4j.Logger LOGR = LogManager.getLogger(Index.class);
 
     /**
      * ******************* MAIN ********************************
@@ -105,9 +106,22 @@ public abstract class Index implements Initializable {
         this.date_lbl.setText("Date: " + today.format(formatter));
         this.user_lbl.setText("User: " + user.getEmpname());
         this.last_login_lbl.setText("Last Login: " + last_login.format(formatter));
-        this.title_lbl.setText("CGA Blank App");
         this.state = new AppState();
-        
+
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                appinfo = AppInfo.info();
+                try {
+                    title_lbl.setText(appinfo.getApp_name());
+                } catch (Exception e) {
+                    title_lbl.setText("CGA Ltd Application");
+                    LOGR.info("Failed to set Application Title in header. Using generic Title");
+                }
+            }
+        };
+        t.start();
+
         LOGR.info("Header succesfully created");
     }
 
@@ -117,8 +131,6 @@ public abstract class Index implements Initializable {
     public abstract void buildChild();
 
     public abstract void saveData();
-
-    public abstract void loadData();
 
     /**
      * ******************* TASKS ********************************
@@ -146,7 +158,7 @@ public abstract class Index implements Initializable {
                         Stage stage = (Stage) last_login_lbl.getScene().getWindow();
                         stage.setOnCloseRequest(event -> {
                             event.consume();
-                            endProgram(state);
+                            endProgram();
                         });
                     });
                     return null;
@@ -164,9 +176,13 @@ public abstract class Index implements Initializable {
      */
     @FXML
     public void clearBttn(ActionEvent ae) throws Exception {
-        AppInfo info = AppInfo.info();
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle(info.getApp_name());
+        try {
+            alert.setTitle(this.appinfo.getApp_name());
+        } catch (Exception e) {
+            alert.setTitle("Application");
+            LOGR.error("clearBttn AppInfo failed");
+        }
         alert.setHeaderText("Clear Data");
         ButtonType buttonTypeOne = new ButtonType("Save");
         ButtonType buttonTypeTwo = new ButtonType("Clear");
@@ -193,7 +209,7 @@ public abstract class Index implements Initializable {
     }
 
     @FXML
-    private void about() {
+    public void about() {
         AppInfo.showAbout();
     }
 
@@ -228,46 +244,43 @@ public abstract class Index implements Initializable {
      * ** Very Long Functions *********
      */
     //Create a dialoge when closing application
-    private void endProgram(AppState state) {
-
-        AppInfo info = AppInfo.info();
-
+    @FXML
+    public void endProgram() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle(info.getApp_name());
-
+        try {
+            alert.setTitle(this.appinfo.getApp_name());
+        } catch (Exception e) {
+            alert.setTitle("CGA Ltd Application");
+            LOGR.error("endProgram AppInfo failed");
+        }
         alert.setHeaderText("Close Application");
         ButtonType buttonTypeOne = new ButtonType("Save");
         ButtonType buttonTypeTwo = new ButtonType("Exit");
         ButtonType buttonTypeThree = new ButtonType("Cancel");
-
         switch (state.getAppState()) {
             case "WIP":
                 alert.setContentText("You have unsaved Data. "
                         + "Are you sure you want to close the application");
                 alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree);
-                break;
             case "FAIL":
                 alert.setContentText("You have not saved your Data. "
                         + "Are you sure you want to close the application");
                 alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree);
-                break;
             default:
                 alert.setContentText("Do you wish to exit the application?");
                 alert.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree);
-
-                Optional<ButtonType> result = alert.showAndWait();
-
-                if (result.get() == buttonTypeTwo) {
-                    Stage stage = (Stage) menu_bar.getScene().getWindow();
-                    stage.close();
-                } else if (result.get() == buttonTypeThree) {
-                    alert.close();
-                } else {
-                    saveData();
-                }
+        }
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeTwo) {
+            Stage stage = (Stage) menu_bar.getScene().getWindow();
+            stage.close();
+        } else if (result.get() == buttonTypeThree) {
+            alert.close();
+        } else {
+            saveData();
         }
     }
-// Iterates through anchor object setting all form objects to empty
+    // Iterates through anchor object setting all form objects to empty
 
     private void clearItems() {
         for (Node node : anchor.getChildren()) {

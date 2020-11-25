@@ -140,6 +140,7 @@ public class LoginController implements Initializable {
                     } else {
                         //triggers Gui error event
                         loginError("Error! Please Re-Enter Username or Password");
+                        LOGR.error("User Credentials Failed" );
                     }
                 }
             }
@@ -178,6 +179,7 @@ public class LoginController implements Initializable {
         load.setLocation(getClass().getResource("/main/Main.fxml"));
         Parent root = load.load();
 
+        try{
         //Passes data from LoginController to MainController
         main.MainController mContr = load.getController();
         mContr.setYear(login_year);
@@ -189,6 +191,9 @@ public class LoginController implements Initializable {
         stage.setTitle("CGA Ltd Daily Financials");
         stage.setResizable(false);
         stage.show();
+        }catch(Exception e){
+        LOGR.fatal("Main FXML failed to load");        
+        }
     }
 
     /**

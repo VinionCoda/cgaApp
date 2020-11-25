@@ -31,7 +31,7 @@ public class Data {
             return DriverManager.getConnection(connectionUrl);
         } // Handle any errors that may have occurred.
         catch (SQLException e) {
-            LOGR.error("Connection to program database failed");
+            LOGR.fatal("Connection to program database failed");
             return null;
         }
     }
@@ -43,7 +43,7 @@ public class Data {
             return DriverManager.getConnection(connectionUrl);
         } // Handle any errors that may have occurred.
         catch (SQLException e) {
-             LOGR.error("Connection to user database failed");
+             LOGR.fatal("Connection to user database failed");
             return null;
         }
     }    
@@ -55,7 +55,7 @@ public class Data {
             return DriverManager.getConnection(connectionUrl);
         } // Handle any errors that may have occurred.
         catch (SQLException e) {
-             LOGR.error("Connection to macola database failed");
+             LOGR.fatal("Connection to macola database failed");
             return null;
         }
     }
