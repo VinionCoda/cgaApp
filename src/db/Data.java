@@ -27,7 +27,7 @@ public class Data {
      *///Access SQLExpress Server  
     public static Connection openCon() {
         try {
-            String connectionUrl = "jdbc:sqlserver://192.168.0.30:1433; database=finance;user=sa;password={P@ssword123};";
+            String connectionUrl = "jdbc:sqlserver://192.168.0.0:1433; database=###;user=####;password={#####};";
             return DriverManager.getConnection(connectionUrl);
         } // Handle any errors that may have occurred.
         catch (SQLException e) {
@@ -39,7 +39,7 @@ public class Data {
     //Access SQLExpress Server    
     public static Connection openUsers() {
         try {
-            String connectionUrl = "jdbc:sqlserver://192.168.0.30:1433; database=global_users;user=sa;password={P@ssword123};";
+            String connectionUrl = "jdbc:sqlserver://192.168.0.0:1433; database=###;user=####;password={#####};";
             return DriverManager.getConnection(connectionUrl);
         } // Handle any errors that may have occurred.
         catch (SQLException e) {
@@ -51,7 +51,7 @@ public class Data {
     //Access Macola database from old 2003sql server
     public static Connection openMacola() {
         try {
-            String connectionUrl = "jdbc:jtds:sqlserver://192.168.0.1/data;namedPipe=true";
+            String connectionUrl = "jdbc:jtds:sqlserver://192.168.0.0/data;namedPipe=true";
             return DriverManager.getConnection(connectionUrl);
         } // Handle any errors that may have occurred.
         catch (SQLException e) {
@@ -63,7 +63,7 @@ public class Data {
     //Access SQLExpress Server
     public static Connection openMysql() {
         try {
-            String connectionUrl = "jdbc:mysql://localhost/test?user=admin&password=P@ssw0rd123";
+            String connectionUrl = "jdbc:mysql://localhost/test?user=####&password=####";
             return DriverManager.getConnection(connectionUrl);
         } // Handle any errors that may have occurred.
         catch (SQLException e) {
