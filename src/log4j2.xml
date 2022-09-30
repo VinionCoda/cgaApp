@@ -25,8 +25,8 @@
          
         <!-- EMAIL LOG -->   
         <SMTP name="Mail" subject="Crital Failure" to="vinion2k@gmail.com" from="cgaFinanceApp@cgacaribbean.com"
-              smtpHost="smtp-relay.sendinblue.com" smtpUsername="vinion2000@aol.com" 
-              smtpPassword= "vpH18sZxjLKgbARY" smtpPort="587" bufferSize="1">
+              smtpHost="" smtpUsername="" 
+              smtpPassword= "" smtpPort="" bufferSize="1">
         </SMTP>
         
         <!-- FILE LOG -->
